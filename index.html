@@ -95,6 +95,7 @@
       // the writeup to view the URL pattern for fetch one and fetch all
       function fetchAll() {
         hideRecordForm();
+        const out = document.getElementById("output");
         const endpoint = document.getElementById("endpoint").value;
         fetch(endpoint)
           .then((response) => {
@@ -106,12 +107,11 @@
             }
 
             response.json().then((data) => {
-              const out = document.getElementById("output");
               out.textContent = JSON.stringify(data);
             });
           })
           .catch((err) => {
-            console.log("Fetch Error :-S", err);
+            out.textContent = err;
           });
       }
 
@@ -148,7 +148,7 @@
             });
           })
           .catch((err) => {
-            console.log("Fetch Error :-S", err);
+            out.textContent = err;
           });
       }
 
@@ -180,7 +180,7 @@
               out.textContent = JSON.stringify(data);
             })
             .catch((error) => {
-              console.error("Error:", error);
+              out.textContent = error;
             });
         }
         return false;
@@ -216,7 +216,7 @@
               out.textContent = JSON.stringify(data);
             })
             .catch((error) => {
-              console.error("Error:", error);
+              out.textContent = error;
             });
         }
         return false;
@@ -235,7 +235,7 @@
         const id = prompt("enter record id");
         const endpoint = document.getElementById("endpoint").value;
         fetch(endpoint + "/" + id, {
-          method: "DELETE"
+          method: "DELETE",
         })
           .then((response) => {
             if (response.status !== 200) {
@@ -245,11 +245,11 @@
               return;
             }
             response.json().then((data) => {
-               out.textContent = JSON.stringify(data);
+              out.textContent = JSON.stringify(data);
             });
           })
           .catch((err) => {
-            console.log("fetch error :-s", err);
+            out.textContent = err;
           });
       }
 
